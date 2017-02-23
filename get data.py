@@ -15,9 +15,9 @@ QRImagePath=os.path.join(os.getcwd(),'qrcode.jpg')
 tip=0
 uuid=''
 
-base_url=''
-redirect_url=''
-push_url=''
+base_uri=''
+redirect_uri=''
+push_uri=''
 
 skey=''
 wxsid=''
@@ -96,7 +96,22 @@ def waitForLogin():
     r=myRequests.get(url=url)
     r.encoding='utf-8'
     data=r.text
-    regx=r'window'
+    regx=r'window.code=(\d+);'
+    pm=re.search(regx,data)
+
+    code=pm.group(1)
+
+    if code=='201':  #已扫描
+        print('成功扫描，请在手机上确认以登录')
+        tip=0
+    elif code=='200':  #已登录
+        print('正在登录...')
+        regx=r'window.redirect_uri="(\S+?)";'
+        pm=re.search(regx,data)
+        redirect_uri=pm.group(1)+'&fun=new'
+
+
+
 
 
 
