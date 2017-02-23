@@ -2,7 +2,7 @@
 ###2017/2/22
 ####1.获取当前进程工作目录（操作的目录）
 ```python
-os.getcwd()　　　#get current work direction
+os.getcwd()   #get current work direction
 ```
 <br>
 ###2017/2/23
@@ -62,6 +62,7 @@ with open(filename, 'ab') as fd:   #ab:二进制形式追加写入
 ```python
 import os
 os.startfile(filename)  #win下类似于双击操作。
+```
 
 
 　
