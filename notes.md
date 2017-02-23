@@ -6,7 +6,7 @@ os.getcwd()   #get current work direction
 ```
 
 ### 2017/2/23
-#### 1.正则表达式元符<br>
+#### 1.正则表达式元符
 　　\d:一个数字；<br>
 　　\w：一个字母或数字；<br>
 　　\s：一个空格；<br>
