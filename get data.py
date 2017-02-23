@@ -96,7 +96,7 @@ def waitForLogin():
     r=myRequests.get(url=url)
     r.encoding='utf-8'
     data=r.text
-
+    regx=r'window'
 
 
 
