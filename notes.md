@@ -69,19 +69,19 @@ with open(filename, 'ab') as fd:   #ab:二进制形式追加写入
 import os
 os.startfile(filename)  #win下类似于双击操作。
 ```
-###2017/2/24
-####1.HTTP响应代码
+### 2017/2/24
+#### 1.HTTP响应代码
 * 200：请求成功
 * 201：请求成功并创建一个了新资源
 * 408：指示客户端没有在服务器准备等待的时间内生成请求<br>
 [响应状态代码Index](http://www.cnblogs.com/lijialong/archive/2011/01/13/http-response-code.html)
-####2.Win下杀进程
+#### 2.Win下杀进程
 ```python
 os.system('taskkill /IM dllhost.exe')      #"/IM"前后各有一个空格，加上进程名
 os.system('taskkill /F /IM dllhost.exe')   #"/F"强制终止进程
 ```
 进程名：任务管理器 → 应用程序 → 右击  转到进程　
-####3.解析xml
+#### 3.解析xml
 * 从xml文件得到dom对象（dom: document object model）
 ```python
 dom1=xml.dom.minidom.parse('xml file path')
