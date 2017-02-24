@@ -91,3 +91,5 @@ dom1=xml.dom.minidom.parse('xml file path')
 dom2=xml.dom.minidom.parseString(xmlString)
 ```
 [xml.dom.minidom教程](http://www.cnblogs.com/kaituorensheng/p/4493306.html)
+#### 4.import非默认路径下的库
+　　新建环境变量：PYTHONPATH,将值设置为库所在目录
