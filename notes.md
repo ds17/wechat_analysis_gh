@@ -82,11 +82,11 @@ os.system('taskkill /F /IM dllhost.exe')   #"/F"强制终止进程
 ```
 进程名：任务管理器 → 应用程序 → 右击  转到进程　
 #### 3.解析xml
-* 从xml文件得到dom对象（dom: document object model）
+　　从xml文件得到dom对象（dom: document object model）
 ```python
 dom1=xml.dom.minidom.parse('xml file path')
 ```
-* 从xml字符串的得到DOM对象
+　　从xml字符串的得到DOM对象
 ```python
 dom2=xml.dom.minidom.parseString(xmlString)
 ```
