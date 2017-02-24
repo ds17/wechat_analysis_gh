@@ -63,6 +63,7 @@ with open(filename, 'ab') as fd:   #ab:二进制形式追加写入
     * URI可以分为URL,URN或同时具备locators 和names特性的一个东西。<br>
     URN作用就好像一个人的名字，URL就像一个人的地址。<br>
     换句话说：URN确定了东西的身份，URL提供了找到它的方式。<br>
+<br>
 #### 9.调用关联App打开文件
 ```python
 import os
