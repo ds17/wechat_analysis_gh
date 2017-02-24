@@ -1,7 +1,7 @@
 #D:\Python\Python35\python
 # -*- coding:utf-8 -*-
 
-import os,requests,re,time
+import os,requests,re,time,logging
 import xml.dom.minidom
 import json,sys,math,subprocess,ssl,threading,urllib
 
@@ -11,6 +11,10 @@ max_group_num=2
 interface_calling_interval=5
 
 QRImagePath=os.path.join(os.getcwd(),'qrcode.jpg')
+
+logfile=os.path.join(os.getcwd(),'wechat_analysis.log')
+logging.basicConfig(filename=logfile,level=logging.INFO,format='%(asctime)s %(message)s')
+
 
 tip=0
 uuid=''
@@ -54,10 +58,13 @@ def getUUID():
     r=myRequests.get(url=url, params=params)
     r.encoding='utf-8'
     data=r.text
+
     regx = r'window.QRLogin.code = (\d+); window.QRLogin.uuid = "(\S+?)"'
     pm=re.search(regx,data)
     code=pm.group(1)
     uuid=pm.group(2)
+
+    logging.info('\n getUUID \n uuid="%s" \n text="%s"' %(uuid,data))
 
     if code=='200':
         return True
@@ -91,7 +98,7 @@ def showQRImage():
     print('请使用维修扫描二维码登录')
 
 def waitForLogin():
-    global tip,base_url,redirect_url,push_url
+    global tip,base_uri,redirect_uri,push_uri
     url='https://login.weixin.qq.com/cgi-bin/mmwebwx-bin/login?tip=%s&uuid=%s&_=%s' %(tip,uuid,int(time.time()))
     r=myRequests.get(url=url)
     r.encoding='utf-8'
@@ -109,6 +116,42 @@ def waitForLogin():
         regx=r'window.redirect_uri="(\S+?)";'
         pm=re.search(regx,data)
         redirect_uri=pm.group(1)+'&fun=new'
+        base_uri=redirect_uri[:redirect_uri.rfind('/')]
+
+        services=[
+            ('wx2.qq.com', 'webpush2.weixin.qq.com'),
+            ('qq.com', 'webpush.weixin.qq.com'),
+            ('web1.wechat.com', 'webpush1.wechat.com'),
+            ('web2.wechat.com', 'webpush2.wechat.com'),
+            ('wechat.com', 'webpush.wechat.com'),
+            ('web1.wechatapp.com', 'webpush1.wechatapp.com')
+        ]
+        push_uri=base_uri
+        for (searchUrl,pushUrl) in services:
+            if base_uri.find(searchUrl)>=0:
+                push_uri='https://%s/cgi-bin/mmwebwx-bin' %pushUrl
+                break
+        os.system('taskkill /F /IM dllhost.exe')   #杀进程：强制杀，windows照片查看器
+    elif code=='408':  #超时
+        pass
+
+    return code
+
+
+def login():
+    global skey, wxsid, wxuin, pass_ticket, BaseRequest
+
+    r=myRequests.get(url=redirect_uri)
+    r.encoding='utf-8'
+    data=r.text
+
+    logging.info('\n loging(): \n redirect_uri:"%s"' %data)
+
+    doc=xml.dom.minidom.parseString(data)
+    root=doc.documentElement
+
+
+
 
 
 
