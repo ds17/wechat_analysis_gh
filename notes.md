@@ -1,4 +1,4 @@
-## Python
+## Python<br>
 ### 2017/2/22
 #### 1.获取当前进程工作目录（操作的目录）
 ```python
@@ -63,26 +63,25 @@ with open(filename, 'ab') as fd:   #ab:二进制形式追加写入
     * URI可以分为URL,URN或同时具备locators 和names特性的一个东西。<br>
     URN作用就好像一个人的名字，URL就像一个人的地址。<br>
     换句话说：URN确定了东西的身份，URL提供了找到它的方式。<br>
-    ![url uri urn](http://images2015.cnblogs.com/blog/591228/201601/591228-20160116223301225-1866838315.png)<br>
-####9.调用关联App打开文件
+    ![url uri urn](http://images2015.cnblogs.com/blog/591228/201601/591228-20160116223301225-1866838315.png)
+#####9.调用关联App打开文件
 ```python
 import os
 os.startfile(filename)  #win下类似于双击操作。
 ```
-<br>
-### 2017/2/24
-#### 1.HTTP响应代码
+###2017/2/24
+####1.HTTP响应代码
 * 200：请求成功
 * 201：请求成功并创建一个了新资源
 * 408：指示客户端没有在服务器准备等待的时间内生成请求<br>
 [响应状态代码Index](http://www.cnblogs.com/lijialong/archive/2011/01/13/http-response-code.html)
-#### 2.Win下杀进程
+####2.Win下杀进程
 ```python
 os.system('taskkill /IM dllhost.exe')      #"/IM"前后各有一个空格，加上进程名
 os.system('taskkill /F /IM dllhost.exe')   #"/F"强制终止进程
 ```
 进程名：任务管理器 → 应用程序 → 右击  转到进程　
-#### 3.解析xml
+####3.解析xml
 * 从xml文件得到dom对象（dom: document object model）
 ```python
 dom1=xml.dom.minidom.parse('xml file path')
@@ -92,6 +91,3 @@ dom1=xml.dom.minidom.parse('xml file path')
 dom2=xml.dom.minidom.parseString(xmlString)
 ```
 [xml.dom.minidom教程](http://www.cnblogs.com/kaituorensheng/p/4493306.html)
-
-
-
