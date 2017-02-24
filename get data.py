@@ -145,13 +145,38 @@ def login():
     r.encoding='utf-8'
     data=r.text
 
-    logging.info('\n loging(): \n redirect_uri:"%s"' %data)
+    logging.info('\n loging(): \n xmlString Data:"%s" \n \n \n' %data)
 
     doc=xml.dom.minidom.parseString(data)
-    root=doc.documentElement
+    root=doc.documentElement   #返回xml对象根节点
 
+    for node in root.childNodes:
+        if node.nodeName=='skey':
+            skey=node.childNodes[0].data
+        elif node.nodeName=='wxsid':
+            wxsid=node.childNodes[0].data
+        elif node.nodeName=='wxuin':
+            wxuin=node.childNodes[0].data
+        elif node.nodeName=='pass_ticket':
+            pass_ticket=node.childNodes[0].data
 
+        logging.info('\n login() \n skey: %s, wxsid: %s, wxuin: %s, pass_ticket: %s \n \n \n' % (skey, wxsid, wxuin, pass_ticket))
 
+    if not all((skey,wxsid,wxuin,pass_ticket)):
+        return False
+
+    BaseRequest={
+        'Uin':int(wxuin),
+        'Sid':wxsid,
+        'Skey':skey,
+        'DeviceID':deviceID,
+    }
+    return True
+
+def webwxinit():
+    url=base_uri+'/webwxinit?pass_ticket=%s&skey=%s&r=%s' %(pass_ticket, skey, int(time.time()))
+    params={'BaseRequest':BaseRequest}
+    headers={'contend-type': 'application/json; charset=UTF-8'}
 
 
 
