@@ -64,7 +64,7 @@ with open(filename, 'ab') as fd:   #ab:二进制形式追加写入
     URN作用就好像一个人的名字，URL就像一个人的地址。<br>
     换句话说：URN确定了东西的身份，URL提供了找到它的方式。<br>
     ![url uri urn](http://images2015.cnblogs.com/blog/591228/201601/591228-20160116223301225-1866838315.png)
-#####9.调用关联App打开文件
+####9.调用关联App打开文件
 ```python
 import os
 os.startfile(filename)  #win下类似于双击操作。
