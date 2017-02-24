@@ -11,12 +11,7 @@
 
 <br>
 
-### 2017/2/22
-
-Install requests.<br>
-#### test cmd markdown
-edit and saved in cmd.markdowm<br>
-comitte in pycharm
+### 2017/2/24
 
 
 
