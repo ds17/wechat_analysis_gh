@@ -93,3 +93,9 @@ dom2=xml.dom.minidom.parseString(xmlString)
 [xml.dom.minidom教程](http://www.cnblogs.com/kaituorensheng/p/4493306.html)
 #### 4.import非默认路径下的库
 　　新建环境变量：PYTHONPATH,将值设置为库所在目录
+###2017/2/26
+####1.json数据解码
+```python
+r=requests.get('url')    #requests得到json数据
+data=r.json()    #用json方法解码JSON数据。
+#json: javasript object notation 轻量级数据交换格式，一种数据交换语言。

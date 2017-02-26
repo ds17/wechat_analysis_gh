@@ -178,6 +178,10 @@ def webwxinit():
     params={'BaseRequest':BaseRequest}
     headers={'contend-type': 'application/json; charset=UTF-8'}
 
+    r=myRequests.post(url=url,data=json.dumps(params),headers=headers)
+    r.encoding='utf-8'
+    data=r.json()
+
 
 
 
