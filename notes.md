@@ -99,3 +99,13 @@ dom2=xml.dom.minidom.parseString(xmlString)
 r=requests.get('url')    #requests得到json数据
 data=r.json()    #用json方法解码JSON数据。
 #json: javasript object notation 轻量级数据交换格式，一种数据交换语言。
+```
+####2.pycharm手动安装plugins
+下载ZIP文件后可直接安装，下载时需注意对应的pycharm版本。
+####3.pycharm快捷键
+切换标签：ALT+LEFT/RIGHT<br>
+[pycharm快捷键](http://blog.csdn.net/pipisorry/article/details/39909057)
+####4.range函数
+```python
+x=range(1,4)  #只能取得：1,2,3。4是取不到的。
+```

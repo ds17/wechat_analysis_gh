@@ -182,6 +182,59 @@ def webwxinit():
     r.encoding='utf-8'
     data=r.json()
 
+    logging.info('webwxinit(): \n json data:',data)
+
+    if DEBUG:
+        f=open(os.path.join(os.getcwd(),'webwxinit.json'),'wb')
+        f.write(r.content)
+        f.close()
+
+    global Contactlist, My ,Synckey
+    dic=data
+    Contactlist=dic['Contactlist']
+    My=dic['user']
+    Synckey=dic['SyncKey']
+
+    state=responseState('webwxinit',dic['BaseResponse'])
+    return state
+
+def webwxgetcontact():
+    url=(base_uri+'/webwxgetcontact?pass_ticket=%s&skey=%s&r=%s' %(pass_ticket,skey,int(time.time())))
+    headers={'content-type':'application/json; charset=UTF-8'}
+
+    r=myRequests.post(url=url,headers=headers)
+    data=r.json()
+
+    if DEBUG :
+        f=open(os.path.join(os.getcwd(),'webwxgetcontact.json'),'wb')
+        f.write(r.content)
+        f.close()
+
+    dic=data
+    logging.info('contact data:\n',data)
+    MemberList=dic['MemberList']
+
+    #倒序遍历,不然删除的时候出问题
+    SpecialUsers=["newsapp", "fmessage", "filehelper", "weibo", "qqmail", "tmessage", "qmessage", "qqsync",
+                  "floatbottle", "lbsapp", "shakeapp", "medianote", "qqfriend", "readerapp", "blogapp",
+                  "facebookapp", "masssendapp", "meishiapp", "feedsapp", "voip", "blogappweixin", "weixin"]
+    for i in range(len(MemberList)-1,-1,-1):
+        Member=MemberList[i]
+        if Member['Verifyflag'] & 8 !=0 : #公众号/服务号
+            MemberList.remove(Member)
+        elif Member['UserName'] in SpecialUsers: #特殊账号
+            MemberList.remove(Member)
+        elif Member['UserName'].find('@@') !=-1: #群聊
+            MemberList.remove(Member)
+        elif Member['UserName']==My['UserName']: #自己
+            MemberList.remove(Member)
+
+    return  MemberList
+
+def syncKey():
+
+
+
 
 
 
