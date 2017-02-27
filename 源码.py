@@ -377,7 +377,8 @@ def main():
     imageIndex = 0
     for Member in MemberList:
         imageIndex = imageIndex + 1
-        name = '/root/Desktop/friendImage/image' + str(imageIndex) + '.jpg'
+        name = 'D:\wechat user Image\\'+str(imageIndex)+'.jpg'
+
         imageUrl = 'https://wx.qq.com' + Member['HeadImgUrl']
         r = myRequests.get(url=imageUrl, headers=headers)
         imageContent = (r.content)

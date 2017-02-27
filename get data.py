@@ -253,7 +253,7 @@ def syncCheck():
     r.encoding='utf-8'
     data=r.text
 
-    logging.info('syncCheck data: \n',data)
+    logging.info('syncCheck data: \n %s' %data)
 
     regx=r'window.synccheck={retcode:"(\d+)",selector:"(\d+)"}'
     pm=re.search(regx,data)
@@ -333,7 +333,7 @@ def main():
     imageIndex=0
     for Member in Memberlist:
         imageIndex=imageIndex+1
-        name='D:\wechat analysis Image'+str(imageIndex)+'.jpg'
+        name='D:\wechat user Image\\'+str(imageIndex)+'.jpg''
         imageUrl='https://wx.qq.com'+Member['HeadImgUrl']
         r=myRequests.get(url=imageUrl,headers=headers)
         imageContent=r.content
