@@ -6,6 +6,7 @@ import xml.dom.minidom
 import json,sys,math,subprocess,ssl,threading,urllib
 
 DEBUG=False
+global BaseRequest
 
 max_group_num=2
 interface_calling_interval=5
@@ -29,11 +30,11 @@ wxuin=''
 pass_ticket=''
 deviceID='e000000000000000'
 
-baseRequest={}
+BaseRequest={}
 
 contactList=[]
 my=[]
-syncKey=[]
+SyncKey=[]
 
 def responseState(func,BaseResponse):
     ErrMsg=BaseResponse['ErrMsg']
@@ -166,11 +167,12 @@ def login():
         return False
 
     BaseRequest={
-        'Uin':int(wxuin),
-        'Sid':wxsid,
-        'Skey':skey,
-        'DeviceID':deviceID,
+        'Uin': int(wxuin),
+        'Sid': wxsid,
+        'Skey': skey,
+        'DeviceID': deviceID,
     }
+    #print(BaseRequest.get('Skey'))
     return True
 
 def webwxinit():
@@ -189,11 +191,11 @@ def webwxinit():
         f.write(r.content)
         f.close()
 
-    global Contactlist, My ,Synckey
+    global Contactlist, My ,SyncKey
     dic=data
-    Contactlist=dic['Contactlist']
-    My=dic['user']
-    Synckey=dic['SyncKey']
+    Contactlist=dic['ContactList']
+    My=dic['User']
+    SyncKey=dic['SyncKey']
 
     state=responseState('webwxinit',dic['BaseResponse'])
     return state
@@ -220,7 +222,7 @@ def webwxgetcontact():
                   "facebookapp", "masssendapp", "meishiapp", "feedsapp", "voip", "blogappweixin", "weixin"]
     for i in range(len(MemberList)-1,-1,-1):
         Member=MemberList[i]
-        if Member['Verifyflag'] & 8 !=0 : #公众号/服务号
+        if Member['VerifyFlag'] & 8 !=0 : #公众号/服务号
             MemberList.remove(Member)
         elif Member['UserName'] in SpecialUsers: #特殊账号
             MemberList.remove(Member)
@@ -232,22 +234,130 @@ def webwxgetcontact():
     return  MemberList
 
 def syncKey():
+    SyncKeyItems=['%s_%s' %(item['Key'],item['Val']) for item in SyncKey['List']]
+    SyncKeyStr='|'.join(SyncKeyItems)
+    return SyncKeyStr
 
+def syncCheck():
+    url=push_uri+'/synccheck?'
+    params={
+        'sid': BaseRequest['Sid'],
+        'skey':BaseRequest['Skey'],
+        'uin':BaseRequest['Uin'],
+        'deviceId':BaseRequest['DeviceID'],
+        'synckey':syncKey(),
+        'r':int(time.time()),
+    }
 
+    r=myRequests.get(url,params=params)
+    r.encoding='utf-8'
+    data=r.text
 
+    logging.info('syncCheck data: \n',data)
 
+    regx=r'window.synccheck={retcode:"(\d+)",selector:"(\d+)"}'
+    pm=re.search(regx,data)
 
+    retcode=pm.group(1)
+    selector=pm.group(2)
 
+    return selector
+
+def webwxsync():
+    global SyncKey
+    url=base_uri+'/webwxsync?lang=zh_CN&skey=%s&sid=%s&pass_ticket=%s' %(BaseRequest['Skey'],
+                                                                         BaseRequest['Sid'], urllib.quote_plus(pass_ticket))
+    params={
+        'BaseRequest':BaseRequest,
+        'SyncKey':SyncKey,
+        'rr':~int(time.time()),
+    }
+    headers={'content-type':'application/json; charset=UTF-8'}
+
+    r=myRequests.post(url=url,data=json.dumps(params))
+    r.encoding='utf-8'
+    data=r.json()
+
+    dic=data
+    SyncKey=dic['SyncKey']
+
+    state=responseState('webwxsync',dic['BaseResponse'])
+    return state
+
+def heartBeatLoop():
+    while True:
+        selector=syncCheck()
+        if selector!=0:
+            webwxsync()
+        time.sleep(1)
 
 
 def main():
     global myRequests
+    if hasattr(ssl, '_create_univerified_context'):
+        ssl._create_default_https_context=ssl._create_univerified_context
 
-
+    headers={'User-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36'}
+    #Mozilla/5.0 (Windows NT 6.1; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0
 
     myRequests=requests.Session()
+    myRequests.headers.update(headers)
 
+    if not getUUID():
+        print('获取uuid失败')
+        return
+    print('正在获取二维码图片...')
+    showQRImage()
 
+    while waitForLogin() !='200':
+        pass
 
+    os.remove(QRImagePath)
 
+    if not login():
+        print('登录失败')
+        return
 
+    if not webwxinit():
+        print('初始化失败')
+        return
+
+    Memberlist=webwxgetcontact()
+
+    threading.Thread(target=heartBeatLoop())
+
+    MemberCount=len(Memberlist)
+    print('通讯录共%s位好友' %MemberCount)
+
+    d={}
+    imageIndex=0
+    for Member in Memberlist:
+        imageIndex=imageIndex+1
+        name='D:\wechat analysis Image'+str(imageIndex)+'.jpg'
+        imageUrl='https://wx.qq.com'+Member['HeadImgUrl']
+        r=myRequests.get(url=imageUrl,headers=headers)
+        imageContent=r.content
+        fileImage=open(name,'wb')
+        fileImage.write(imageContent)
+        fileImage.close()
+        print('正在下载第：'+str(imageIndex)+'位好友头像')
+        d[Member['UserName']]=(Member['NickName'],Member['RemarkName'])
+        city=Member['City']
+        city='nocity' if city=='' else city
+        name=Member['Nickname']
+        name='noname' if name=='' else name
+        sign=Member['Signature']
+        sign='nosign' if sign=='' else sign
+        remark=Member['RemarkName']
+        remark='noremark' if remark=='' else remark
+        alias=Member['Alias']
+        alias='noalias' if alias=='' else alias
+        nick=Member['NickName']
+        nick='nonick' if nick=='' else nick
+        print(name,' ^+*+^ ',city,' ^+*+^ ',Member['Sex'],' ^+*+^ ',Member['StarFriend'],
+              ' ^+*+^ ',sign,' ^+*+^ ',remark,' ^+*+^ ',alias,' ^+*+^ ',nick)
+
+if __name__=='__main__':
+    main()
+    print('回车键退出')
+    input()
