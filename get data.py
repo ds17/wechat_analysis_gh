@@ -3,7 +3,8 @@
 
 import os,requests,re,time,logging
 import xml.dom.minidom
-import json,sys,math,subprocess,ssl,threading,urllib
+import json,sys,math,subprocess,ssl,threading
+from urllib import parse
 
 DEBUG=False
 global BaseRequest
@@ -265,8 +266,7 @@ def syncCheck():
 
 def webwxsync():
     global SyncKey
-    url=base_uri+'/webwxsync?lang=zh_CN&skey=%s&sid=%s&pass_ticket=%s' %(BaseRequest['Skey'],
-                                                                         BaseRequest['Sid'], urllib.quote_plus(pass_ticket))
+    url=base_uri+'/webwxsync?lang=zh_CN&skey=%s&sid=%s&pass_ticket=%s' %(BaseRequest['Skey'],BaseRequest['Sid'], parse.quote_plus(pass_ticket))
     params={
         'BaseRequest':BaseRequest,
         'SyncKey':SyncKey,
@@ -324,7 +324,7 @@ def main():
 
     Memberlist=webwxgetcontact()
 
-    threading.Thread(target=heartBeatLoop())
+    threading.Thread(target=heartBeatLoop)
 
     MemberCount=len(Memberlist)
     print('通讯录共%s位好友' %MemberCount)
@@ -333,7 +333,7 @@ def main():
     imageIndex=0
     for Member in Memberlist:
         imageIndex=imageIndex+1
-        name='D:\wechat user Image\\'+str(imageIndex)+'.jpg''
+        name='D:\\wechat user Image\\'+str(imageIndex)+'.jpg'
         imageUrl='https://wx.qq.com'+Member['HeadImgUrl']
         r=myRequests.get(url=imageUrl,headers=headers)
         imageContent=r.content
@@ -344,7 +344,7 @@ def main():
         d[Member['UserName']]=(Member['NickName'],Member['RemarkName'])
         city=Member['City']
         city='nocity' if city=='' else city
-        name=Member['Nickname']
+        name=Member['NickName']
         name='noname' if name=='' else name
         sign=Member['Signature']
         sign='nosign' if sign=='' else sign
