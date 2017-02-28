@@ -109,3 +109,17 @@ data=r.json()    #用json方法解码JSON数据。
 ```python
 x=range(1,4)  #只能取得：1,2,3。4是取不到的。
 ```
+###2017/2/28
+####1.url的编码问题
+按标准，URL只允许一部分ASCII字符，其他字符非法。例如汉字就是非法的。
+<br>所以在进行HTTP请求时，将“非法字符”进行编码。
+```python
+#python 3.x
+from urllib import parse
+parse.quote(str)  #除了 -._/09AZaz ,都会进行编码
+parse.quote_plus(str)   #更激进，也会编码 /
+```
+####2.进程/线程
+一个任务就是一个进程，每个进程可以处理很多种事务，
+即多个子任务，子任务成为线程(Tread)。
+
