@@ -131,4 +131,12 @@ git config --global https.proxy http://0.237.130.43:2375
 git config --global http.sslverify false 
 ```
 另外在push到github选项中不勾选：Clone git repositories using 
-
+####2.pycharm multi commit and push
+#####同时commit and push到oschina/github。
+<br>①在oschina/github上跟别建立repository，分别命名为r_name_os/r_name_gh。
+<br>②在本地建两个文件夹：osChina/GitHub。
+<br>③pycharm→VCS→check out from version control，分别将osChina/GitHub项目check out 到本地。
+<br>④分别为两个project。以GitHub为主进行工作commit后将修改的文件copy至osChina目录下，打开r_name_os项目commit and push。
+####3.日志级别
+NOTEST<DEBUG<INFO<WARNING<ERROR<CRITICAL<br>
+默认为：logging.WARNING

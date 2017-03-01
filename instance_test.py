@@ -1,5 +1,7 @@
 #D:\Python\Python35\python
 # -*- coding:utf-8 -*-
 
-for i in range(5,-1,-1):
-    print(i)
+import logging,os
+log1=logging.getLogger('log1')
+formatter1=logging.Formatter('%(asctime)s')
+

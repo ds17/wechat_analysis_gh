@@ -15,7 +15,7 @@ interface_calling_interval=5
 QRImagePath=os.path.join(os.getcwd(),'qrcode.jpg')
 
 logfile=os.path.join(os.getcwd(),'wechat_analysis.log')
-logging.basicConfig(filename=logfile,level=logging.INFO,format='%(asctime)s %(message)s')
+logging.basicConfig(filename=logfile,level=logging.WARNING,format='%(asctime)s %(message)s')
 
 
 tip=0
@@ -206,6 +206,7 @@ def webwxgetcontact():
     headers={'content-type':'application/json; charset=UTF-8'}
 
     r=myRequests.post(url=url,headers=headers)
+    r.encoding='utf-8'
     data=r.json()
 
     if DEBUG :
