@@ -122,4 +122,13 @@ parse.quote_plus(str)   #更激进，也会编码 /
 ####2.进程/线程
 一个任务就是一个进程，每个进程可以处理很多种事务，
 即多个子任务，子任务成为线程(Tread)。
+###2017/3/1
+####1.Git代理设置
+公司电脑pycharm通过git连接oschina/github提示端口错误，先修改pycharm的代理为公司默认代理设置，再更改git的代理设置。
+```python
+git config --global http.proxy http://10.237.130.43:2375
+git config --global https.proxy http://0.237.130.43:2375
+git config --global http.sslverify false 
+```
+另外在push到github选项中不勾选：Clone git repositories using 
 
