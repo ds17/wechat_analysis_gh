@@ -8,3 +8,4 @@ url=api % i
 r=requests.get(url)
 data=r.json()
 print(data)
+#cookie
