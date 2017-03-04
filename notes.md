@@ -140,3 +140,6 @@ git config --global http.sslverify false
 ####3.日志级别
 NOTEST<DEBUG<INFO<WARNING<ERROR<CRITICAL<br>
 默认为：logging.WARNING
+###2017/3/4
+####1.导出Cookie
+火狐安装Firebug，在面板上直接右键“导出本站点Cookie”，可得到一个txt文件。
