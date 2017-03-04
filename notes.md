@@ -138,8 +138,9 @@ git config --global http.sslverify false
 <br>③pycharm→VCS→check out from version control，分别将osChina/GitHub项目check out 到本地。
 <br>④分别为两个project。以GitHub为主进行工作commit后将修改的文件copy至osChina目录下，打开r_name_os项目commit and push。
 ####3.日志级别
-NOTEST<DEBUG<INFO<WARNING<ERROR<CRITICAL<br>
+NOTEST\<DEBUG\<INFO\<WARNING\<ERROR\<CRITICAL<br>
 默认为：logging.WARNING
 ###2017/3/4
 ####1.导出Cookie
 火狐安装Firebug，在面板上直接右键“导出本站点Cookie”，可得到一个txt文件。
+![截图](https://raw.githubusercontent.com/ds17/wechat_analysis_gh/master/img_gh/firebug%E5%AF%BC%E5%87%BAcookie.png)
