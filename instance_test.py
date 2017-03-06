@@ -85,5 +85,10 @@ def phone_loc():
     except:
         print('爬取error')
 
+def test():
+    url='https://www.baidu.com'
+    r=requests.get(url)
+    print(r.url)
+
 if __name__=='__main__':
-    phone_loc()
+    test()
