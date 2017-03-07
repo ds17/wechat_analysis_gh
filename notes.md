@@ -150,3 +150,16 @@ NOTEST\<DEBUG\<INFO\<WARNING\<ERROR\<CRITICAL<br>
 ####1.工具网站
 获取ip地理位置，电话归属地：http://m.ip138.com/<br>
 网址缩短：http://suo.im/
+###2017/3/7
+####1.python油管安装：pip
+```python
+pip list --outdated  #查看过期库
+python -m pip install --upgrade (lib name)   #升级过期库
+python - m pip install (lib name)  #安装库
+```
+####2.pip安装已编码文件
+先安装wheel: pip install wheel <br>
+[下载已编码的*.whl文件](http://www.lfd.uci.edu/~gohlke/pythonlibs/)<br>
+安装: jieba/wordcloud/scrapy ← twisted ← biopython 
+####3.matplotlib中文乱码
+[解决方案](http://blog.csdn.net/heloowird/article/details/46343519)
