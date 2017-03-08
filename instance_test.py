@@ -85,6 +85,14 @@ def phone_loc():
     except:
         print('爬取error')
 
-if __name__=='__main__':
-    phone_loc()
+def bs_test():
+    from bs4 import BeautifulSoup
+    url='http://python123.io/ws/demo.html'
+    r=requests.get(url)
+    soup=BeautifulSoup(r.text,'html.parser')
+    print(soup.p.string)
 
+
+if __name__=='__main__':
+    # phone_loc()
+    bs_test()
