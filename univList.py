@@ -3,7 +3,7 @@
 'python课程实例：爬取大学列表'
 
 
-import requests,bs4
+import requests,bs4,csv,os
 from bs4 import BeautifulSoup
 
 
@@ -31,6 +31,14 @@ def printUnivlist(ulist,num):
         u=ulist[i]
         print('{:^5}\t{:<20}\t{:<6}\t{:>10}'.format(u[0],u[1],u[2],u[3]))
 
+def writeToCSV(ulist,num):
+    file=open(os.path.join(os.getcwd(),'univList.csv'),'w',newline='')
+    writer=csv.writer(file)
+    writer.writerow(['排名','学校名称','省市','总分'])
+    for i in range(num):
+        u=ulist[i]
+        writer.writerow([u[0],u[1],u[2],u[3]])
+    file.close()
 
 def main():
     url = 'http://www.zuihaodaxue.cn/zuihaodaxuepaiming2016.html'
@@ -39,6 +47,7 @@ def main():
 
     fillUnivList(uinfo,html)
     printUnivlist(uinfo,20) # 20 univs
+    # writeToCSV(uinfo,100)
 
 
 main()
