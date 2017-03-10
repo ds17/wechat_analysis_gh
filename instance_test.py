@@ -91,7 +91,8 @@ def bs_test():
     r=requests.get(url)
     soup=BeautifulSoup(r.text,'html.parser')
 
-    print(soup.a.next_sibling)
+    for link in soup.find_all('a'):
+        print(link.get('href'))
     # for tag in soup.a.next_siblings:
     #     print(tag)
 
@@ -115,9 +116,17 @@ def json_test():
     file=open(filepath,'r')
     data=json.load(file)
 
+def sa_before_tax():
+    base=float(input('Input Salary per month:'))
+    month_get=base * (1-0.175)
+    total_wage=month_get * 12  + base * 4
+    sa_before=total_wage / 12 / (1-0.175)
+    print('sa_before:',float('%.2f' %sa_before))
+
 
 if __name__=='__main__':
     # phone_loc()
-    bs_test()
+    # bs_test()
     # csv_test()
     # json_test()
+    sa_before_tax()

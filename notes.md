@@ -188,3 +188,11 @@ writer.writerow(['1','2','3'])   #在原文件末尾添加一行
 
 file.close()  #最后记得关闭文件
 ```
+####3.python模块搜索路径
+默认搜索路径获得：
+```python
+import sys 
+print(sys.path)  #已包含的搜索路径
+sys.path.append('/Users/michael/my_py_scripts')  #暂时性添加模块搜索路径
+```
+永久性修改：环境变量  PYTHONPATH
