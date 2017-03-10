@@ -87,12 +87,16 @@ def phone_loc():
 
 def bs_test():
     from bs4 import BeautifulSoup
-    url='http://python123.io/ws/demo.html'
+    # url='http://python123.io/ws/demo.html'
+    url='http://www.dysfz.net/'
     r=requests.get(url)
+    r.encoding=r.apparent_encoding
     soup=BeautifulSoup(r.text,'html.parser')
 
-    for link in soup.find_all('a'):
-        print(link.get('href'))
+    for link in soup('a'):
+        link_attr=link.get('href')
+        if re.match('http',link_attr):
+            print(link_attr)
     # for tag in soup.a.next_siblings:
     #     print(tag)
 
@@ -123,10 +127,13 @@ def sa_before_tax():
     sa_before=total_wage / 12 / (1-0.175)
     print('sa_before:',float('%.2f' %sa_before))
 
+def bs_project():
+    url='http://www.zuihaodaxue.cn/zuihaodaxuepaiming2016.html'
+
 
 if __name__=='__main__':
     # phone_loc()
-    # bs_test()
+    bs_test()
     # csv_test()
     # json_test()
-    sa_before_tax()
+    # sa_before_tax()
