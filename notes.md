@@ -163,3 +163,28 @@ python - m pip install (lib name)  #安装库
 安装: jieba/wordcloud/scrapy ← twisted ← biopython 
 ####3.matplotlib中文乱码
 [解决方案](http://blog.csdn.net/heloowird/article/details/46343519)
+###2017/3/10
+####1.打开文件时指定newline参数
+```python
+file=open(file_path,'r',newline='')
+```
+newline是用来控制文本模式之下，一行的结束字符。可以是None，’’，\n，\r，\r\n。<br>
+当在读取模式下，如果新行符为None，那么就作为通用换行符模式工作，意思就是说当遇到\n，\r或\r\n都可以作为换行标识，
+并且统一转换为\n作为文本输入的换行符。当设置为空’’时，也是通用换行符模式工作，但不作转换为\n，输入什么样的，就保持原样全输入。
+当设置为其它相应字符时，就会判断到相应的字符作为换行符，并保持原样输入到文本。
+<br><br>
+当在输出模式时，如果新行符为None，那么所有输出文本都是采用\n作为换行符。
+如果设置为’’或者\n时，不作任何的替换动作。如果是其它字符，会在字符后面添加\n作为换行符。
+####2.CSV文件读写
+```python
+import csv
+file_path='file path'
+file=open(file_path,'r+',newline='')
+reader=csv.reader(file)
+writer=csv.writer(file)
+for line in reader():
+    print(line)  #CSV文件每一行内容被转化为一个有序列表
+writer.writerow(['1','2','3'])   #在原文件末尾添加一行
+
+file.close()  #最后记得关闭文件
+```

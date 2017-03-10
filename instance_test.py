@@ -1,6 +1,6 @@
 #D:\Python\Python35\python
 # -*- coding:utf-8 -*-
-import requests,re
+import requests,re,csv
 
 def get_sina():
     api='http://m.weibo.cn/index/my?format=cards&page=%s'
@@ -90,9 +90,34 @@ def bs_test():
     url='http://python123.io/ws/demo.html'
     r=requests.get(url)
     soup=BeautifulSoup(r.text,'html.parser')
-    print(soup.p.string)
+
+    print(soup.a.next_sibling)
+    # for tag in soup.a.next_siblings:
+    #     print(tag)
+
+
+def csv_test():
+    file_path=r'C:\Users\SP52479\Desktop\AQI计算.csv'
+    file=open(file_path,'r+',newline='\n')
+
+
+    reader=csv.reader(file)
+    writer=csv.writer(file)
+    data=[]
+    for line in reader:
+        data.append(line)
+    writer.writerow(['python2','write2','csv2','test2'])
+    writer.writerow(['value1','value2'])
+
+def json_test():
+    import json
+    filepath=r'C:\Users\SP52479\Desktop\test.json'
+    file=open(filepath,'r')
+    data=json.load(file)
 
 
 if __name__=='__main__':
     # phone_loc()
     bs_test()
+    # csv_test()
+    # json_test()
