@@ -196,3 +196,17 @@ print(sys.path)  #已包含的搜索路径
 sys.path.append('/Users/michael/my_py_scripts')  #暂时性添加模块搜索路径
 ```
 永久性修改：环境变量  PYTHONPATH
+###2017/3/11
+####1.自定义类时定义私有变量
+在变量名前加双下划线：'__'；用单下滑线‘_’时仍然可以访问并修改。
+```python
+class Student(object):
+    def __init__(self,name,age):
+        self.__name=name
+        self.__age=age
+
+bob=Student('bab kaka',36)
+bob._Student__name='richard jin'
+bob.__name='new name'  #运行后不会报错，因为解释器创建了一个新变量:bob.__name
+```
+双下划线：Python解释器对外把__name变量改成了_Student__name。可通过_Student__name访问。

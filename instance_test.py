@@ -104,8 +104,6 @@ def bs_test():
 def csv_test():
     file_path=r'C:\Users\SP52479\Desktop\AQI计算.csv'
     file=open(file_path,'r+',newline='\n')
-
-
     reader=csv.reader(file)
     writer=csv.writer(file)
     data=[]
@@ -127,13 +125,51 @@ def sa_before_tax():
     sa_before=total_wage / 12 / (1-0.175)
     print('sa_before:',float('%.2f' %sa_before))
 
-def bs_project():
-    url='http://www.zuihaodaxue.cn/zuihaodaxuepaiming2016.html'
+def format_test():
+    tplt='i\'m {0}{{and}}'
+    print(tplt.format('test '))
+
+def csv_dic():
+    f_p=r'C:\Users\SP52479\Desktop\AQI计算.csv'
+    file=open(f_p,'r+',newline='')
+    reader=csv.DictReader(file,fieldnames=['A','B','C','D','E','F','G'],restkey='空')
+    file_dict=[]
+    for row in reader:
+        # file_dict.append(row)
+        print(row)
+    file.close()
+    # print(file_dict)
+
+def class_test():
+    class Student(object):
+        def __init__(self,name,age):
+            self.__name=name
+            self.__age=age
+
+        def print_info(self):
+            print('%s is %s years old' %(self.__name,self.__age))
+
+        def get_grade(self):
+            if self.__age<30:
+                return 'young'
+            elif self.__age<50:
+                return 'Middle'
+            else:
+                return 'old'
+
+    bob=Student('bab kaka',36)
+    print(bob.get_grade())
+    bob._Student__name='richard jin'
+    bob.print_info()
+
 
 
 if __name__=='__main__':
     # phone_loc()
-    bs_test()
+    # bs_test()
     # csv_test()
     # json_test()
     # sa_before_tax()
+    # format_test()
+    # csv_dic()
+    class_test()
