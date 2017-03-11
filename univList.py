@@ -26,10 +26,11 @@ def fillUnivList(ulist,html):
 
 
 def printUnivlist(ulist,num):
-    print('{:^5}\t{:<20}\t{:<6}\t{:>10}'.format('排名','学校名称','省市','总分'))
+    tplt='{0:^10}\t{1:{4}^10}\t{2:^10}\t{3:^10}'
+    print(tplt.format('排名','学校名称','省市','总分',chr(12288)))
     for i in range(num):
         u=ulist[i]
-        print('{:^5}\t{:<20}\t{:<6}\t{:>10}'.format(u[0],u[1],u[2],u[3]))
+        print(tplt.format(u[0],u[1],u[2],u[3],chr(12288)))
 
 def writeToCSV(ulist,num):
     file=open(os.path.join(os.getcwd(),'univList.csv'),'w',newline='')
@@ -47,7 +48,7 @@ def main():
 
     fillUnivList(uinfo,html)
     printUnivlist(uinfo,20) # 20 univs
-    # writeToCSV(uinfo,100)
+    writeToCSV(uinfo,100)
 
 
 main()
