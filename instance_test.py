@@ -162,7 +162,12 @@ def class_test():
     bob._Student__name='richard jin'
     bob.print_info()
 
+def jieba_test():
+    import jieba.analyse
 
+    text='每个txt文件夹里面存放一个用户的全部微博数据，在result_all文件里面存放了全部用户的微博数据，这里实现读取每个用户的数据并为每个用户提取30个关键字。将为每个用户提取出来的关键字存放在同一个文件topic_all.txt文件里面。'
+    keywords=jieba.analyse.extract_tags(text)
+    print(keywords)
 
 if __name__=='__main__':
     # phone_loc()
@@ -172,4 +177,5 @@ if __name__=='__main__':
     # sa_before_tax()
     # format_test()
     # csv_dic()
-    class_test()
+    # class_test()
+    jieba_test()

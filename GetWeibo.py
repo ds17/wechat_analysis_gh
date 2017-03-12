@@ -2,6 +2,11 @@
 # -*- coding:utf-8 -*-
 
 import requests,re,csv
+import jieba.analyse
+from wordcloud import WordCloud
+from scipy.misc import imread
+import matplotlib.pyplot as plt
+
 
 # cookies={'ALF':'1520752594',
 #          'SCF':'AlDNHv7-FnOqek_jVZZf73TmTX2uYz4Ew4hrTzQgESW1GrQw_Ma7Ytp_pXUGe7cg_iRDONB2cRlCDfbIThNlWRM.',
@@ -28,7 +33,7 @@ def fetch_weibo():
     api='http://m.weibo.cn/index/my?format=cards&page=%s'
 
     def clean(text):
-        regx=r'<a .*?/a>|<i .*?/i>|转发微博|//|Repost|，|？|。|、|分享图片|（|）|(|)|：|:|&quot;'
+        regx=r'<a .*?/a>|<i .*?/i>|转发微博|//|Repost|，|？|。|、|分享图片|（|）|(|)|：|:|&quot;|.'
         content=re.sub(regx,'',text)
         return content
 
@@ -59,9 +64,28 @@ def write_csv(texts):
         writter.writerow([text])
     file.close()
 
+def word_segment(texts):
+    for text in texts:
+        tags=jieba.analyse.extract_tags(text)
+        yield ' '.join(tags)
+
+def generate_img(tags):
+    mask_path='./img_gh/heart-mask.jpg'
+    data=' '.join(tag for tag in tags)
+    mask_img=imread(mask_path,flatten=True)
+    my_cloud=WordCloud(font_path='msyh.ttc',
+                       background_color='white',
+                       mask=mask_img).generate(data)
+    plt.imshow(my_cloud)
+    plt.axis('off')
+    plt.savefig('./heart.jpg',dpi=1200)
+
 if __name__=='__main__':
     texts=claen_text()
-    write_csv(texts)
+    # write_csv(texts)
+    # for text in word_segment(texts):
+    #     print(text)
+    generate_img(word_segment(texts))
 
 
 
