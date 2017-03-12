@@ -8,6 +8,7 @@ from scipy.misc import imread
 import matplotlib.pyplot as plt
 
 
+
 # cookies={'ALF':'1520752594',
 #          'SCF':'AlDNHv7-FnOqek_jVZZf73TmTX2uYz4Ew4hrTzQgESW1GrQw_Ma7Ytp_pXUGe7cg_iRDONB2cRlCDfbIThNlWRM.',
 #          'SSOLoginState':'1489216595',

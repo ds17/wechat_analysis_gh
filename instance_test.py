@@ -100,6 +100,15 @@ def bs_test():
     # for tag in soup.a.next_siblings:
     #     print(tag)
 
+def codes_test():
+    a='风卷残云'
+    print(type(a))
+    # b=a.encode('utf-8')
+    # print(b)
+    # print(type(b))
+
+
+
 
 def csv_test():
     file_path=r'C:\Users\SP52479\Desktop\AQI计算.csv'
@@ -178,4 +187,5 @@ if __name__=='__main__':
     # format_test()
     # csv_dic()
     # class_test()
-    jieba_test()
+    # jieba_test()
+    codes_test()
