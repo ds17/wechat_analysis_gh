@@ -178,6 +178,21 @@ def jieba_test():
     keywords=jieba.analyse.extract_tags(text)
     print(keywords)
 
+def ana_test():
+    import time
+    print(time.time())
+
+def ocdb_test():
+    import pyodbc
+    dbfile=r'X:\sect1\2 试验数据\RAC\17S\NS\一次设试\NS12 试验数据\3.14\暖房定格\cav20170314_100749_1.mdb'
+    conn=pyodbc.connect(r'Drivers={Microsoft Access Driver(*.mdb,*.accdb)};DBQ='+dbfile +';Uid=;Pwd=;')
+    cursor=conn.cursor
+    SQL='SLECT * from table1;'
+    for row in cursor.excute(SQL):
+        print (row.coll)
+    cursor.close()
+    conn.close()
+
 if __name__=='__main__':
     # phone_loc()
     # bs_test()
@@ -188,4 +203,5 @@ if __name__=='__main__':
     # csv_dic()
     # class_test()
     # jieba_test()
-    codes_test()
+    # codes_test()
+    ocdb_test()
