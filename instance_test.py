@@ -201,7 +201,9 @@ def ocdb_test():
     conn.close()
 
 def press_exit():
-    input('按Enter建退出：')
+    # input('按Enter建退出：')
+    import msvcrt
+    print((msvcrt.getch()))
 
 if __name__=='__main__':
     # phone_loc()

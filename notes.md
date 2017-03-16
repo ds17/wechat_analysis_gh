@@ -210,3 +210,10 @@ bob._Student__name='richard jin'
 bob.__name='new name'  #运行后不会报错，因为解释器创建了一个新变量:bob.__name
 ```
 双下划线：Python解释器对外把__name变量改成了_Student__name。可通过_Student__name访问。
+###2017/3/16
+####1.python实现任意键退出/继续
+利用msvcrt模块
+```python
+import msvcrt
+print(ord(msvcrt.getch()))  #getch获得一个键盘输入，ord将其转换为ASCII值，通过判定特定的ASCII值或Enter来决定是实现按下特定按键后的操作。
+```
