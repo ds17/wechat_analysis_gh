@@ -151,25 +151,32 @@ def csv_dic():
 
 def class_test():
     class Student(object):
+        __slots__=('name','age')
         def __init__(self,name,age):
-            self.__name=name
-            self.__age=age
+            self.name=name
+            self.age=age
 
         def print_info(self):
-            print('%s is %s years old' %(self.__name,self.__age))
+            print('%s is %s years old' %(self.name,self.age))
 
         def get_grade(self):
-            if self.__age<30:
+            if self.age<30:
                 return 'young'
-            elif self.__age<50:
+            elif self.age<50:
                 return 'Middle'
             else:
                 return 'old'
+        # def set_score(self,score):
+        #     self.score=score
 
     bob=Student('bab kaka',36)
-    print(bob.get_grade())
-    bob._Student__name='richard jin'
-    bob.print_info()
+
+    # from types import MethodType
+    # bob.set_score=MethodType(set_score,bob)
+    # bob.set_score(66)
+    # print(getattr(bob,'score'))
+    # bob._Student__name='richard jin'
+    # bob.print_info()
 
 def jieba_test():
     import jieba.analyse
@@ -193,6 +200,9 @@ def ocdb_test():
     cursor.close()
     conn.close()
 
+def press_exit():
+    input('按Enter建退出：')
+
 if __name__=='__main__':
     # phone_loc()
     # bs_test()
@@ -204,4 +214,5 @@ if __name__=='__main__':
     # class_test()
     # jieba_test()
     # codes_test()
-    ocdb_test()
+    # ocdb_test()
+    press_exit()
