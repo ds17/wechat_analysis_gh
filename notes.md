@@ -24,6 +24,8 @@ os.getcwd()   #get current work direction
 ```python
 m.group(0)  #原始字符串
 m.group(1)  #第一个字符串
+info=re.findall(r'regx',pattern)  #返回一个列表
+info=re.finditer(r'regx',patterm)  #返回一个match对象，只有match对象才具有group属性。
 ```
 #### 3.正则表达式编译后直接匹配
 ```python
