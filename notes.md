@@ -225,9 +225,14 @@ bob.__name='new name'  #运行后不会报错，因为解释器创建了一个�
 import msvcrt
 print(ord(msvcrt.getch()))  #getch获得一个键盘输入，ord将其转换为ASCII值，通过判定特定的ASCII值或Enter来决定是实现按下特定按键后的操作。
 ```
-####2017/3/21
+###2017/3/21
 ####1.去除字符串中英文双引号
 ```python
 print(eval('"书""包"'))
 #书包
 ```
+###2017/4/9
+####1.scrapy pywin32模块报错
+报错内容：import win32api ImportError DLL load failed
+①需手动安装pywin32模块；<br>
+将\Lib\site-packages\pywin32_system32下所有文件复制到C:\Windows\System32
