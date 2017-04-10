@@ -236,3 +236,8 @@ print(eval('"书""包"'))
 报错内容：import win32api ImportError DLL load failed
 ①需手动安装pywin32模块；<br>
 将\Lib\site-packages\pywin32_system32下所有文件复制到C:\Windows\System32
+###2017/4/10
+####1.安装第三方库编译错误
+缺少c++ compiler 可去[whl下载页面](http://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud)下载编译器
+####2.CMD 切换工作路径后pip 失效
+直接：pip install D:/python/ananconda3/wordcloud-1.3.1-cp36-cp36m-win_amd64.whl
