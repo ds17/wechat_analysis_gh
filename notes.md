@@ -241,3 +241,6 @@ print(eval('"书""包"'))
 缺少c++ compiler 可去[whl下载页面](http://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud)下载编译器
 ####2.CMD 切换工作路径后pip 失效
 直接：pip install D:/python/ananconda3/wordcloud-1.3.1-cp36-cp36m-win_amd64.whl
+###2017/4/20
+####1.numpy写入csv文件
+只能写一维或二维的数据。
