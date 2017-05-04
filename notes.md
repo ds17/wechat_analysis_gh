@@ -212,7 +212,7 @@ class Student(object):
     def __init__(self,name,age):
         self.__name=name
         self.__age=age
-
+·
 bob=Student('bab kaka',36)
 bob._Student__name='richard jin'
 bob.__name='new name'  #运行后不会报错，因为解释器创建了一个新变量:bob.__name
@@ -244,3 +244,6 @@ print(eval('"书""包"'))
 ###2017/4/20
 ####1.numpy写入csv文件
 只能写一维或二维的数据。
+###2017/5/4
+####1.文件类型匹配
+内建标准库：fnmatch
