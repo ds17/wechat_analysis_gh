@@ -247,3 +247,18 @@ print(eval('"书""包"'))
 ###2017/5/4
 ####1.文件类型匹配
 内建标准库：fnmatch
+###2017/5/21
+####1.conda新环境
+```python
+conda create --name tensorflow python=3.5  #创建新环境，指定python版本
+activate tensorflow
+pip install numpy
+pip install tensorflow
+
+conda info --envs  #确认当前环境
+conda remove -n en_name --all  #删除环境
+
+#返回默认环境
+deactivate
+activate root
+```
