@@ -269,6 +269,7 @@ activate tensorflow
 python setup.py install
 ```
 ####2.pyinstaller
+通过pypi安装的pyinstaller不支持python3.5+，需下载[(GitHub)](https://github.com/pyinstaller/pyinstaller)最新版手动安装。
 ```commandline
 pyinstaller -F -w gbk.py
 ```
