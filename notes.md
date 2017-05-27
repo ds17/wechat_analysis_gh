@@ -262,3 +262,13 @@ conda remove -n en_name --all  #删除环境
 deactivate
 activate root
 ```
+###2017/5/27
+####1.手动安装第三方库
+```commandline
+activate tensorflow
+python setup.py install
+```
+####2.pyinstaller
+```commandline
+pyinstaller -F -w gbk.py
+```
